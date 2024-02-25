@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Search Results</title>
+</head>
+<body>
+    <h1>Flight Search Results</h1>
+    
+    {% if flights %}
+        <ul>
+            {% for flight in flights %}
+                <li>
+                    {{ flight.name }} - {{ flight.number }} - {{ flight.date }} {{ flight.time }}
+                    <a href="{% url 'select_seat' flight.id %}">Book Now</a> <!-- Add booking link -->
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No flights found.</p>
+    {% endif %}
+    
+</body>
+</html>

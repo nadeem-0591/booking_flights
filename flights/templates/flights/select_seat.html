@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Seat</title>
+    <style>
+        .seat-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 50px); /* Adjust column count as needed */
+            gap: 10px; /* Adjust gap between seats */
+        }
+    </style>
+</head>
+<body>
+    <h1>Select Seat for {{ flight.name }} - {{ flight.number }}</h1>
+    
+    <form method="post" action="{% url 'book_flight' flight.id %}">
+        {% csrf_token %}
+        <div class="seat-grid">
+            {% for seat in available_seats %}
+                <label for="seat{{ seat }}">Seat {{ seat }}</label>
+                <input type="checkbox" id="seat{{ seat }}" name="seats" value="{{ seat }}">
+                <input type="text" id="passenger_name_{{ seat }}" name="passenger_name_{{ seat }}" placeholder="Passenger Name">
+            {% endfor %}
+        </div>
+        <input type="hidden" name="flight_id" value="{{ flight.id }}">  <!-- Add hidden input for flight ID -->
+        <button type="submit">Book Selected Seats</button>
+    </form>
+</body>
+</html>

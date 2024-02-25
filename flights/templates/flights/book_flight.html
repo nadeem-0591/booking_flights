@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Flight</title>
+</head>
+<body>
+    <h1>Book Flight - {{ flight.name }} ({{ flight.number }})</h1>
+    
+    {% if messages %}
+        <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    
+    <!-- Add booking form here -->
+    <form method="post">
+        {% csrf_token %}
+        <!-- Include booking form fields here -->
+        <button type="submit">Book Flight</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Search Results</title>
+</head>
+<body>
+    <h1>Flight Search Results</h1>
+    
+    {% if flights %}
+        <ul>
+            {% for flight in flights %}
+                <li>
+                    {{ flight.name }} - {{ flight.number }} - {{ flight.date }} {{ flight.time }}
+                    <form action="{% url 'book_flight' flight.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Book Now</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No flights found.</p>
+    {% endif %}
+    
+    <!-- Add any additional content or formatting as needed -->
+</body>
+</html>
